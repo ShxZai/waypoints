@@ -29,7 +29,9 @@ def free_port() -> int:
 class ApiTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.tmp = tempfile.TemporaryDirectory(prefix="wp-test-")
+        # On Windows the server can hold the database file for a moment after it
+        # is stopped, so a failed clean-up of the temp folder must not fail the run.
+        cls.tmp = tempfile.TemporaryDirectory(prefix="wp-test-", ignore_cleanup_errors=True)
         cls.port = free_port()
         cls.notes = Path(cls.tmp.name) / "notes"
         env = dict(os.environ, PORT=str(cls.port), DATA_DIR=str(Path(cls.tmp.name) / "data"),
