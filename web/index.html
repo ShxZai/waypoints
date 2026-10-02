@@ -1217,7 +1217,7 @@
   <header class="top">
     <div class="brand">
       <h1>Waypoints</h1>
-      <p>A personal chart of where you've been and where you could go — career, health, finance, and skills, mapped as routes rather than a single ladder.</p>
+      <p>A chart that plans your route through a field and a one-to-one AI teacher that takes you along it. First field: programming, from a first Python script to frontier AI.</p>
     </div>
     <div class="overall-stat">
       <div class="num" id="overallNum">0 / 0</div>
@@ -4204,82 +4204,6 @@
   // ---------- data ----------
   const DOMAINS = [
     {
-      id: "career", label: "Career",
-      sub: "Not a single ladder — an employment track, a leadership branch, and an independent path.",
-      lanes: ["Employment", "Leadership", "Independent"],
-      nodes: [
-        { id: "c1", tier: 0, lane: 0, title: "First job or internship", desc: "Any paid or structured work experience — part-time, internship, or your first real job. The starting point everything else builds on.", est: "1–6 months to land", prereqs: [] },
-        { id: "c2", tier: 1, lane: 0, title: "Full-time entry-level role", desc: "A full-time position where you're building core professional skills and reputation.", est: "6–18 months in role", prereqs: ["c1"] },
-        { id: "c3", tier: 2, lane: 0, title: "Specialist at a small company", desc: "Deeper ownership at a small or early-stage company, where your work has outsized visibility.", est: "1–2 years", prereqs: ["c2"] },
-        { id: "c4", tier: 3, lane: 0, title: "Role at a mid-size company", desc: "More structure, more process, and a track record that opens doors elsewhere.", est: "1–2 years", prereqs: ["c3"] },
-        { id: "c5", tier: 4, lane: 0, title: "Role at a large, well-known company", desc: "A competitive hiring bar and brand-name credibility. Worth mapping even if it's a stretch.", est: "2–4 years, competitive", prereqs: ["c4"], stretch: true },
-        { id: "c6", tier: 3, lane: 1, title: "Team lead / people manager", desc: "Responsible for other people's output, not just your own.", est: "1–2 years", prereqs: ["c3"] },
-        { id: "c7", tier: 4, lane: 1, title: "Director / senior leadership", desc: "Sets strategy for a function, not just a team.", est: "3–6 years", prereqs: ["c6"], stretch: true },
-        { id: "c8", tier: 1, lane: 2, title: "Freelance side project", desc: "Paid work outside your main job, testing whether you can sell your own time.", est: "1–3 months to land first client", prereqs: ["c1"] },
-        { id: "c9", tier: 2, lane: 2, title: "Full-time freelance / contractor", desc: "Independence as your main income, not just a side project.", est: "6–12 months to transition", prereqs: ["c8"] },
-        { id: "c10", tier: 3, lane: 2, title: "Founder / own business", desc: "Building something you own end to end, with all the upside and risk that implies.", est: "1–3 years to establish", prereqs: ["c9"], stretch: true },
-        { id: "c11", tier: 4, lane: 2, title: "Recognized voice in your field", desc: "Writing, speaking, or teaching that makes you known beyond your immediate employer.", est: "2–5 years of consistent output", prereqs: ["c9"], stretch: true }
-      ]
-    },
-    {
-      id: "health", label: "Health & Fitness",
-      sub: "Four routes that reinforce each other: consistency, strength, endurance, and nutrition.",
-      lanes: ["Consistency", "Strength", "Endurance", "Nutrition"],
-      nodes: [
-        { id: "h1", tier: 0, lane: 0, title: "Regular movement habit", desc: "Moving your body on purpose a few times a week, however lightly.", est: "2–4 weeks to establish", prereqs: [] },
-        { id: "h2", tier: 1, lane: 0, title: "Structured workout routine", desc: "A repeatable routine, three or more sessions a week — not just occasional activity.", est: "4–8 weeks", prereqs: ["h1"] },
-        { id: "h3", tier: 2, lane: 0, title: "Six-month consistency streak", desc: "Kept the routine going through busy weeks, travel, and low-motivation stretches.", est: "6 months", prereqs: ["h2"] },
-        { id: "h4", tier: 3, lane: 0, title: "Multi-year sustainable habit", desc: "Fitness that's just part of how you live, not a project you're 'on.'", est: "2–3 years", prereqs: ["h3"] },
-        { id: "h5", tier: 1, lane: 1, title: "Basic strength benchmarks", desc: "Solid form on the fundamental lifts or their bodyweight equivalents.", est: "2–3 months", prereqs: ["h1"] },
-        { id: "h6", tier: 2, lane: 1, title: "Intermediate strength", desc: "Meaningfully stronger than when you started, with numbers to show it.", est: "6–12 months", prereqs: ["h5"] },
-        { id: "h7", tier: 3, lane: 1, title: "Advanced / competitive lifts", desc: "Strength standards most casual lifters never reach.", est: "2–4 years", prereqs: ["h6"], stretch: true },
-        { id: "h8", tier: 1, lane: 2, title: "Can run a 5k", desc: "Comfortable covering 5 kilometers without stopping.", est: "4–8 weeks", prereqs: ["h1"] },
-        { id: "h9", tier: 2, lane: 2, title: "Can run a 10k / half marathon", desc: "A real endurance base, built over months.", est: "3–6 months", prereqs: ["h8"] },
-        { id: "h10", tier: 3, lane: 2, title: "Marathon or ultra distance", desc: "A major endurance goal most people never attempt.", est: "6–12 months", prereqs: ["h9"], stretch: true },
-        { id: "h11", tier: 1, lane: 3, title: "Basic healthy eating habits", desc: "Food choices that generally support your goals, most of the time.", est: "2–4 weeks", prereqs: ["h1"] },
-        { id: "h12", tier: 2, lane: 3, title: "Consistent meal planning", desc: "Nutrition that's planned rather than improvised day to day.", est: "1–2 months", prereqs: ["h11"] },
-        { id: "h13", tier: 3, lane: 3, title: "Dialed-in nutrition", desc: "Eating that reliably gets you the body composition or performance you want.", est: "3–6 months", prereqs: ["h12"] }
-      ]
-    },
-    {
-      id: "finance", label: "Finance",
-      sub: "Stability first, then income, investing, and larger assets branch off it.",
-      lanes: ["Stability", "Income", "Investing", "Assets"],
-      nodes: [
-        { id: "f1", tier: 0, lane: 0, title: "Track spending / basic budget", desc: "You know roughly where your money goes each month.", est: "1–2 weeks to set up", prereqs: [] },
-        { id: "f2", tier: 1, lane: 0, title: "One month emergency fund", desc: "Enough saved to cover a bad month without borrowing.", est: "1–3 months", prereqs: ["f1"] },
-        { id: "f3", tier: 2, lane: 0, title: "Three to six month emergency fund", desc: "A real cushion against job loss or a major surprise expense.", est: "6–12 months", prereqs: ["f2"] },
-        { id: "f4", tier: 3, lane: 0, title: "Debt-free, excluding mortgage", desc: "No consumer or student debt left hanging over your income.", est: "1–3 years, depends on debt load", prereqs: ["f3"] },
-        { id: "f5", tier: 1, lane: 1, title: "Stable, steady income", desc: "Income you can reliably count on month to month.", est: "3–6 months", prereqs: ["f1"] },
-        { id: "f6", tier: 2, lane: 1, title: "Income growing faster than inflation", desc: "Raises, promotions, or side income that actually move the needle.", est: "1–2 years", prereqs: ["f5"] },
-        { id: "f7", tier: 3, lane: 1, title: "Multiple income streams", desc: "Not dependent on a single paycheck.", est: "1–2 years", prereqs: ["f6"] },
-        { id: "f8", tier: 1, lane: 2, title: "Started investing", desc: "Money in a retirement or brokerage account, even if it's small.", est: "1–2 weeks to open & fund", prereqs: ["f1"] },
-        { id: "f9", tier: 2, lane: 2, title: "Diversified portfolio", desc: "Investments spread across assets, not sitting in one bet.", est: "3–6 months", prereqs: ["f8"] },
-        { id: "f10", tier: 3, lane: 2, title: "Investment income that matters", desc: "Returns big enough to notice next to your salary.", est: "5–10 years", prereqs: ["f9"], stretch: true },
-        { id: "f11", tier: 4, lane: 2, title: "Financial independence", desc: "Assets could cover your living costs indefinitely.", est: "10–20+ years", prereqs: ["f10"], stretch: true },
-        { id: "f12", tier: 3, lane: 3, title: "Own a home or major asset", desc: "A significant asset in your name, not just savings.", est: "2–5 years to save & qualify", prereqs: ["f4"], stretch: true }
-      ]
-    },
-    {
-      id: "skills", label: "Skills & Hobbies",
-      sub: "Depth in one craft, creative output, teaching others, and breadth into new ones.",
-      lanes: ["Core skill", "Creative output", "Teaching", "Breadth"],
-      nodes: [
-        { id: "s1", tier: 0, lane: 0, title: "Picked a skill to focus on", desc: "Chosen something specific to get better at, rather than dabbling.", est: "a few days", prereqs: [] },
-        { id: "s2", tier: 1, lane: 0, title: "Consistent practice habit", desc: "Regular deliberate practice, not just occasional bursts of interest.", est: "1–2 months", prereqs: ["s1"] },
-        { id: "s3", tier: 2, lane: 0, title: "Genuinely competent", desc: "Good enough that it's a real, usable skill, not just a hobby you mention.", est: "6–12 months", prereqs: ["s2"] },
-        { id: "s4", tier: 3, lane: 0, title: "Advanced / recognized skill", desc: "Skilled enough that others notice or seek you out for it.", est: "2–4 years", prereqs: ["s3"], stretch: true },
-        { id: "s5", tier: 1, lane: 1, title: "First finished project", desc: "Something you actually completed and can point to, however small.", est: "2–4 weeks", prereqs: ["s1"] },
-        { id: "s6", tier: 2, lane: 1, title: "Regularly shipping projects", desc: "Finishing things often enough that it's a pattern, not a one-off.", est: "3–6 months", prereqs: ["s5"] },
-        { id: "s7", tier: 3, lane: 1, title: "Public body of work", desc: "A portfolio substantial enough to represent you on its own.", est: "1–2 years", prereqs: ["s6"], stretch: true },
-        { id: "s8", tier: 1, lane: 2, title: "Sharing informally", desc: "Helping friends or posting online — low-stakes teaching.", est: "a few weeks", prereqs: ["s2"] },
-        { id: "s9", tier: 2, lane: 2, title: "Mentoring others", desc: "Someone specific relies on you to help them improve.", est: "3–6 months", prereqs: ["s8"] },
-        { id: "s10", tier: 3, lane: 2, title: "Known teacher or creator", desc: "A reputation in a community for this, beyond people you know personally.", est: "1–3 years", prereqs: ["s9"], stretch: true },
-        { id: "s11", tier: 1, lane: 3, title: "Exploring an adjacent skill", desc: "Branching sideways into something related, for breadth.", est: "1–2 months", prereqs: ["s1"] },
-        { id: "s12", tier: 2, lane: 3, title: "Second hobby domain", desc: "A genuinely separate interest, not just an extension of the first.", est: "3–6 months", prereqs: ["s11"] }
-      ]
-    },
-    {
       id: "programming", label: "Programming",
       sub: "The path from a first Python script to the kind of engineer Anthropic or OpenAI would fight to hire — five skill tracks, plus a track of real projects to prove it.",
       lanes: ["Foundations", "Math & Classical ML", "Deep Learning", "Systems & Infra", "Projects & Portfolio", "Research & Theory"],
@@ -4550,8 +4474,8 @@
 
   // ---------- persistence (db capability) ----------
   // Remembers checklist boxes (collection "checklist", one doc per node) and
-  // chart node status + long-shot flags (collection "chart", doc "state",
-  // one doc for every domain) across reloads.
+  // chart node status + long-shot flags (collection "chart", doc "state")
+  // across reloads.
   let db = null;
 
   function saveChecklist(nodeId) {

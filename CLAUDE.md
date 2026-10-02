@@ -1,8 +1,21 @@
-# Waypoints — personal life-progress tracker
+# Waypoints — AI tutoring and planning app
 
-A personal app to document life progress "game style": skill-tree-like charts
-per life domain, showing what's achieved, what's realistically next, and what's
-a long shot — not a strict linear progression, more of a reference map.
+A chart that plans a route through a field (what's achieved, what's
+realistically next, what's a long shot — a reference map, not a strict linear
+progression) plus a one-to-one AI teacher (Learning mode) that takes the
+learner along it.
+
+**Direction (2026-10-02):** the app began as a personal life-progress tracker
+with five domains. At the user's request the Career, Health & Fitness,
+Finance and Skills & Hobbies tabs were removed; **Programming is the only
+field now**, and the longer-term aim is a full-stack tutoring and planning app
+for any field. Nothing field-general has been built yet (teacher prompts and
+the practice runner are still programming/Python-specific) — don't build
+"create a field" or rename prompts to be field-neutral unless asked.
+
+The code is public at https://github.com/ShxZai/waypoints (MIT). `data/`,
+`notes/`, `.env`, `waypoints.html`, the career files and the third-party
+`learn-main/` / `Manware-…` folders are git-ignored; keep it that way.
 
 ## Status
 
@@ -82,14 +95,15 @@ the artifact sandbox allows.
   independent of status. This is the "index of what's less likely achievable
   for me" the user asked for — shown as a dashed ring around the node. It's a
   personal judgment call, not derived from the data.
-- **Five domains** in the current draft: Career, Health & Fitness, Finance,
-  Skills & Hobbies (48 nodes total, ~12 per domain, hand-written generic
-  template content — not based on the user's actual real-life status), and
-  Programming (30 nodes across 6 lanes — Foundations, Math & Classical ML,
-  Deep Learning, Systems & Infra, Projects & Portfolio, Research & Theory —
-  a concrete Python-to-frontier-AI-lab progression the user asked for by
-  name, so unlike the other four it's a real intended path rather than
-  generic placeholder content).
+- **One domain: Programming** (30 nodes across 6 lanes — Foundations, Math &
+  Classical ML, Deep Learning, Systems & Infra, Projects & Portfolio,
+  Research & Theory — a concrete Python-to-frontier-AI-lab progression the
+  user asked for by name). `DOMAINS` is still an array and the tab bar,
+  counters and persistence still loop over it, so a second field is a data
+  addition. The four generic template domains (Career, Health & Fitness,
+  Finance, Skills & Hobbies; ids c*/h*/f*/s*) were removed on 2026-10-02;
+  their old entries in a saved `chart/state` doc are ignored on load. Older
+  notes below that say "the other four domains" refer to them.
 - **Research & Theory lane (pg26-pg30)**: added after a conversation about
   whether math-specialized ML/AI research roles exist (they do — theory/
   interpretability research at labs like Anthropic) and whether that
@@ -111,9 +125,6 @@ the artifact sandbox allows.
   information theory book, and similar primary/high-quality sources — a
   couple of items intentionally have no video or no practice link where no
   good one existed, same convention as the original data.
-- **No persistence yet**: state is in-memory JS only and resets on reload.
-  This was intentional for a first draft — validate the interaction model
-  before wiring up real data storage.
 - **Per-node skill checklist**: a node can optionally carry a `checklist:
   [string, ...]` array — concrete, checkable sub-skills for a broad node
   (e.g. "Data structures & algorithms"). When present, selecting the node
@@ -274,22 +285,17 @@ the artifact sandbox allows.
 
 ## Next steps (not started)
 
-1. Let the user edit the node data to reflect their actual life/goals instead
-   of the generic template.
+1. Towards "any field": Learning mode for the remaining Programming nodes
+   (needs a runner/packages decision, see the Learning mode notes), then
+   charts and non-code practice for other fields. Only when asked.
 2. Optional later: put the app online privately (needs `TEACHER=api`, a host,
    and a login). Only if asked.
 3. Possible future additions the user has *not* asked for yet (don't build
-   unprompted): journaling/notes per node, dates achieved, custom domains
-   beyond the initial four, editing the graph structure itself (add/remove
-   nodes) from the UI.
+   unprompted): journaling/notes per node, dates achieved, editing the graph
+   structure itself (add/remove nodes) from the UI.
 
 ## Working notes for future sessions
 
-- Scope restriction: unless the user explicitly says otherwise in a given
-  request, only make changes to the Programming domain/tab (pg1-pg30 and
-  anything specific to rendering/behavior for it). Don't touch Career,
-  Health & Fitness, Finance, or Skills & Hobbies data or shared code paths
-  as a side effect of a Programming-focused request.
 - Vanilla HTML/CSS/JS in one file by design (fast iteration, no build step).
   Keep it that way unless the user explicitly asks to turn this into a real
   app project.
