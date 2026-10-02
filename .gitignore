@@ -1,0 +1,23 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Local settings and personal data (progress database, session logs)
+.env
+data/
+notes/
+
+# Personal planning files
+career-plan.md
+career-applications.xlsx
+sample_urls.txt
+
+# Backups, the old artifact snapshot, and editor/tool folders
+*.bak-*
+waypoints.html
+.claude/
+
+# Third-party reference material kept locally (not mine to redistribute)
+learn-main/
+Manware-s-AI-Learning-Toolkit-copilot/
